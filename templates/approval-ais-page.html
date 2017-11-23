@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <title>Approval page</title>
+    <link th:href="${serverUrl + '/css/bootstrap.min.css'}" rel="stylesheet"/>
+    <link th:href="${serverUrl + '/css/approval-page.css'}" rel="stylesheet"/>
+</head>
+<body>
+<div class="container">
+    <div class="approval-container">
+        <section class="logo-header">
+            <img class="bank-logo" th:src="${serverUrl + '/img/bank_logo.png'}" alt="Bank logo"/>
+            <h4 class="approval-heading">Authorize <span th:text="${tppName}"></span> to access your personal accounts ?</h4>
+        </section>
+        <form id="approvalForm" name="approvalForm" th:action="${serverUrl + '/oauth/authorize'}" method="post">
+            <input name="user_oauth_approval" value="true" type="hidden"/>
+        </form>
+        <section class="approval-actions">
+            <button class="btn btn-success" type="submit" form="approvalForm">Authorize</button>
+            <form id="denialForm" name="denialForm" th:action="${serverUrl + '/oauth/authorize'}" method="post">
+                <input name="user_oauth_approval" value="false" type="hidden"/>
+                <button class="btn btn-danger" type="submit">Deny</button>
+            </form>
+        </section>
+    </div>
+</div>
+</body>
+</html>

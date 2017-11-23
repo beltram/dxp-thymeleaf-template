@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <title>Approval page</title>
+    <link th:href="${serverUrl + '/css/bootstrap.min.css'}" rel="stylesheet"/>
+    <link th:href="${serverUrl + '/css/approval-page.css'}" rel="stylesheet"/>
+</head>
+<body>
+<div class="container">
+    <div class="approval-container">
+        <section class="logo-header">
+            <img class="bank-logo" th:src="${serverUrl + '/img/bank_logo.png'}" alt="Bank logo"/>
+            <h4 class="approval-heading">Authorize <span th:text="${tppName}"></span> to initiate payment
+                <span th:text="${paymentId}"></span> ?</h4>
+            <h5>Amount : <span th:text="${payment.getInstructedAmount().getAmount()}"/>
+                <span th:text="${payment.getInstructedAmount().getCurrency()}"/></h5>
+            <h5>From your account : <span th:text="${payment.getDebtorInformation().getAccount().getLabel()}"/>
+                (<span th:text="${payment.getDebtorInformation().getAccount().getReference().getId()}"/>)</h5>
+            <h5>To the Beneficiary : <span th:text="${payment.getCreditorInformation().getAccount().getReference().getId()}"/></h5>
+        </section>
+        <form id="approvalForm" name="approvalForm" th:action="${serverUrl + '/oauth/authorize'}" method="post">
+            <input name="user_oauth_approval" value="true" type="hidden"/>
+        </form>
+        <section class="approval-actions">
+            <button class="btn btn-success" type="submit" form="approvalForm">Authorize</button>
+        </section>
+    </div>
+</div>
+</body>
+</html>

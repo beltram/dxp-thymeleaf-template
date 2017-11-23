@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <title>PSU login page</title>
+    <link th:href="${serverUrl + '/css/bootstrap.min.css'}" rel="stylesheet"/>
+    <link th:href="${serverUrl + '/css/login-page.css'}" rel="stylesheet"/>
+</head>
+<body>
+<div class="container">
+    <form class="form-signin" th:action="${loginProcess}" method="post">
+        <div th:if="${loginError}" class="alert alert-danger" role="alert">
+            <strong>Error : </strong> <span th:text="${loginError}"></span>
+        </div>
+        <section class="logo-header">
+            <img class="bank-logo" th:src="${serverUrl + '/img/bank_logo.png'}" alt="Bank logo"/>
+        </section>
+        <div class="form-group">
+            <label for="username" class="sr-only">Username</label>
+            <input type="text" id="username" name="username" class="form-control" placeholder="Username" required="" autofocus=""/>
+        </div>
+        <div class="form-group">
+            <label for="password" class="sr-only">Password</label>
+            <input type="password" id="password" name="password" class="form-control" placeholder="Password" required=""/>
+        </div>
+        <button class="btn btn-lg btn-warning btn-block" type="submit">Sign in</button>
+    </form>
+</div>
+</body>
+</html>
